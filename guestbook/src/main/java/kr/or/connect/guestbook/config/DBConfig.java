@@ -14,10 +14,12 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @EnableTransactionManagement // 트랜잭션과 관련된 설정을 자동을 해줌. 단, 사용자 간의 트랜잭션 처리를 위한 PlatformTransactionManager를
 							 // 설정하기 위해서는 annotationDrivenTransactionManager 메서드를 오버라이딩 해야함.
 public class DBConfig implements TransactionManagementConfigurer {
-	private String driverClassName = "com.mysql.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost:3306/connectdb?useUnicode=true&characterEncoding=utf8";
-	private String username = "connectuser";
-	private String password = "connect123!@#";
+	//private String driverClassName = "com.mysql.jdbc.Driver";
+	//private String url = "jdbc:mysql://localhost:3306/connectdb?useUnicode=true&characterEncoding=utf8";
+	private String driverClassName = "oracle.jdbc.driver.OracleDriver";
+	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	private String username = "scott";
+	private String password = "tiger";
 	
 	@Bean
 	public DataSource dataSource() {
