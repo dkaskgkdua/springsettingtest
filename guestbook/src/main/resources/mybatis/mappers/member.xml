@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<!-- 맵핑될 DAO 인터페이스의 Full name 을 줍니다. -->
+
+<mapper namespace="Member">
+
+
+	<select id="SELECT_ALL_BY_EMAIL" parameterType ="String" resultType="Member">
+		SELECT id, name, password, email, create_date, modify_date 
+		  FROM member2 WHERE email = #{email}
+	</select>
+
+	<insert id="INSERT_MEMBER" parameterType ="Member">
+		insert into springbootToy.member (id, name, password, email, create_date, modify_date) 
+		values ( #{id}, '사용자', #{password}, #{email}, now(), now())
+	</insert>
+	
+	<select id="IS_CAN_JOIN_EMAIL" parameterType="String" resultType="String">
+		select email from member where email = #{email}
+	</select>
+	
+	<insert id="INSERT_MEMBER_ROLE" parameterType ="MemberRole">
+		insert into member_role (id, member_id, role_name) 
+		values ((select ifnull(max(id),0)+1 from member_role), #{memberId}, 'ROLE_USER')
+	</insert>
+	
+	
+	<select id="SELECT_ROLE_ALL_BY_EMAIL" parameterType="String" resultType="MemberRole">
+		SELECT mr.id, mr.member_id, mr.role_name 
+		  FROM member2_role mr JOIN member2 m ON mr.member_id = m.id WHERE m.email = #{email}
+	</select>
+</mapper>

@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -15,7 +17,16 @@ import kr.or.connect.guestbook.dto.MemberRole;
 
 @Repository
 public class MemberRoleDao {
-	private NamedParameterJdbcTemplate jdbc;
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	public List<MemberRole> getRolesByEmail(String email) {
+		
+		return sqlSession.selectList("Member.SELECT_ROLE_ALL_BY_EMAIL", email);
+	}
+	/*
+	//private NamedParameterJdbcTemplate jdbc;
 	// BeanPropertyRowMapper는 Role클래스의 프로퍼티를 보고 자동으로 칼럼과 맵핑해주는 RowMapper객체를 생성한다.
 	// roleId 프로퍼티는 role_id 칼럼과 맵핑이 된다.
 	// 만약 프로퍼티와 칼럼의 규칙이 맞아 떨어지지 않는다면 직접 RowMapper객체를 생성해야 한다.
@@ -31,5 +42,5 @@ public class MemberRoleDao {
 		map.put("email", email);
 
 		return jdbc.query(MemberRoleDaoSqls.SELECT_ALL_BY_EMAIL, map, rowMapper);
-	}
+	}*/
 }

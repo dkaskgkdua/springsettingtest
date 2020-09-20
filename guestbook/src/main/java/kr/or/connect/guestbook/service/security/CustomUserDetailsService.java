@@ -31,6 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         customUserDetails.setPassword(customUser.getPassword());
 
         List<UserRoleEntity> customRoles = userdbService.getUserRoles(loginId);
+        
         // 로그인 한 사용자의 권한 정보를 GrantedAuthority를 구현하고 있는 SimpleGrantedAuthority객체에 담아
         // 리스트에 추가한다. MemberRole 이름은 "ROLE_"로 시작되야 한다.
         List<GrantedAuthority> authorities = new ArrayList<>();

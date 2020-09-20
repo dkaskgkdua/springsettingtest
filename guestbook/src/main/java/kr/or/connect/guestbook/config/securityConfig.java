@@ -33,7 +33,7 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
         http
         .csrf().disable()
         .authorizeRequests()
-        .antMatchers("/", "/main", "/memembers/loginerror", "/members/joinform", "/members/join", "/members/welcome").permitAll()
+        .antMatchers("/", "/main", "/members/loginerror", "/members/joinform", "/members/join", "/members/welcome").permitAll()
         .antMatchers("/securepage", "/members/**").hasRole("USER") // USER 라는 권한이 있어야 하는 URL
         //.antMatchers("/abc/**").hasRole("ADMIN")
         .anyRequest().authenticated()

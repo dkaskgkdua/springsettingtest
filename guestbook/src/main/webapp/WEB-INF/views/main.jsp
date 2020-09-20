@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-gd
+
+<a href="/connect/members/memberinfo">gd</a>
 </body>
 </html>
