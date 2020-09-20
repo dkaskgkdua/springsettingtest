@@ -1,22 +1,22 @@
 package kr.or.connect.guestbook.controller;
 
-import java.io.PrintWriter;
-import java.security.Principal;
-
-import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import kr.or.connect.guestbook.dto.Member;
 import kr.or.connect.guestbook.service.MemberService;
-
+//http://localhost:8088/connect/swagger-ui.html#/
 @Controller
 @RequestMapping(path = "/members")
 public class MemberController {
@@ -43,6 +43,36 @@ public class MemberController {
     public String joinform(){
         return "members/joinform";
     }
+    
+    @ApiOperation(value="회원리스트") // swagger 설명
+    @ApiResponses({  // 응답 메시지에 대한 설명
+    	@ApiResponse(code=200, message = "OK"),
+    	@ApiResponse(code=500, message = "Exception")
+    })
+    @GetMapping("/ex")
+    @ResponseBody
+    public Map<String, Object> list(@RequestParam(name="start", required=false, defaultValue="0") int start) {
+    	List<Member> list = memberService.getUserList();
+    	Map<String, Object> map = new HashMap<>();
+    	map.put("list", list);
+    	
+    	return map;
+    }
+    /*
+    @PostMapping
+    public Member write(@RequestBody Member member, HttpServletRequest request) {
+    	String clientIp = request.getRemoteAddr();
+    	Member member = memberService.addMember(member, clientIp);
+    	return member;
+    }
+    
+    @DeleteMapping("/{id}")
+    public Map<String, String> delete(@PathVariable(name ="id") Long id, HttpServletRequest request) {
+    	String clientIp = request.getRemoteAddr();
+    	int deleteCount = memberService.deleteMember(id, clientIp);
+    	return Collections.singletonMap("success", deleteCount > 0 ? "true" : "false");
+    }
+    */
 /*
     // 사용자가 입력한 name, email, password가 member에 저장된다.
     @PostMapping("/join")

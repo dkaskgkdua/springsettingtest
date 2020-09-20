@@ -13,7 +13,10 @@
 		SELECT id, name, password, email, create_date, modify_date 
 		  FROM member2 WHERE email = #{email}
 	</select>
-
+	<select id="SELECT_ALL_MEMBER" resultType="Member">
+		select id, name, email, create_date, modify_date
+		from member2
+	</select>
 	<insert id="INSERT_MEMBER" parameterType ="Member">
 		insert into springbootToy.member (id, name, password, email, create_date, modify_date) 
 		values ( #{id}, '사용자', #{password}, #{email}, now(), now())

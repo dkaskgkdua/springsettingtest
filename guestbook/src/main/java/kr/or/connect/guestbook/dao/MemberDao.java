@@ -1,6 +1,7 @@
 package kr.or.connect.guestbook.dao;
 
-import org.apache.ibatis.annotations.Param;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,10 @@ public class MemberDao {
 	
 	public Member getMemberByEmail(String loginUserId) {
 		return sqlSession.selectOne("Member.SELECT_ALL_BY_EMAIL", loginUserId);
+	}
+	
+	public List<Member> getMemberList() {
+		return sqlSession.selectList("Member.SELECT_ALL_MEMBER");
 	}
 	
 	

@@ -52,6 +52,13 @@ public class MemberServiceImpl implements MemberService {
         }
         return list;
     }
+    
+    @Override
+    @Transactional
+    public List<Member> getUserList() {
+    	List<Member> memberList = memberDao.getMemberList();
+    	return memberList;
+    }
     /*
     
     @Transactional
