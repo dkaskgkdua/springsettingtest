@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +20,14 @@ import kr.or.connect.guestbook.argumentresolver.HeaderInfo;
 import kr.or.connect.guestbook.dto.Member;
 import kr.or.connect.guestbook.service.MemberService;
 //http://localhost:8088/connect/swagger-ui.html#/
+
 @Controller
 @RequestMapping(path = "/members")
 public class MemberController {
     // 스프링 컨테이너가 생성자를 통해 자동으로 주입한다.
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
-
+    //private static final Log LOG = LogFactory.getLog(MemberController.class);
     public MemberController(MemberService memberService, PasswordEncoder passwordEncoder){
         this.memberService = memberService;
         this.passwordEncoder = passwordEncoder;

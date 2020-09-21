@@ -13,7 +13,7 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
 		<org.springframework-version>5.2.2.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
-		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<org.slf4j-version>1.7.25</org.slf4j-version>
 		<!--  jackson -->
 		<jackson2.version>2.9.4</jackson2.version>
 	</properties>
@@ -23,13 +23,16 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
-			<exclusions>
-				<!-- Exclude Commons Logging in favor of SLF4j -->
+			<!-- 
+			Spring은 기본적으로 commons-logging을 사용하는데 주석처리하면
+			 ClassNotFoundException이 발생한다. jcl-over-slf4j 라이브러리를 추가해주면 해결됨
+			<exclusions>			
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
 				 </exclusion>
 			</exclusions>
+			-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -54,6 +57,11 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
