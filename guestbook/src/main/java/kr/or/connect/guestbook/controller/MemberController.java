@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import kr.or.connect.guestbook.argumentresolver.HeaderInfo;
 import kr.or.connect.guestbook.dto.Member;
 import kr.or.connect.guestbook.service.MemberService;
 //http://localhost:8088/connect/swagger-ui.html#/
@@ -51,10 +52,14 @@ public class MemberController {
     })
     @GetMapping("/ex")
     @ResponseBody
-    public Map<String, Object> list(@RequestParam(name="start", required=false, defaultValue="0") int start) {
+    public Map<String, Object> list(@RequestParam(name="start", required=false, defaultValue="0") int start,
+    		HeaderInfo headerInfo) {
     	List<Member> list = memberService.getUserList();
     	Map<String, Object> map = new HashMap<>();
     	map.put("list", list);
+    	System.out.println("-----------------------------------------------------");
+		System.out.println(headerInfo.get("user-agent"));
+		System.out.println("-----------------------------------------------------");
     	
     	return map;
     }

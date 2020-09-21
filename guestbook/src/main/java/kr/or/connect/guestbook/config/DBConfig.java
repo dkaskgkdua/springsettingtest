@@ -31,7 +31,7 @@ public class DBConfig //implements TransactionManagementConfigurer
 	 * private String driverClassName = "com.mysql.cj.jdbc.Driver";
 	 * private String url = "jdbc:mysql://localhost:3306/connectdb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC";
 	 * */
-	private String username = "admin";
+	private String username = "1234";
 	private String password = "song8420";
 	
 	//@Bean
